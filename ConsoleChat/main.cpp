@@ -28,6 +28,7 @@ int main(int argc, char *argv[])
     QHostAddress serverIp{serverIpString};
 
     ConsoleWrapper consoleWrapper(name,localPort,serverPort,serverIp);
+    QObject::connect(&consoleWrapper, SIGNAL(disconnect()), &a, SLOT(quit()));
 
     return a.exec();
 }
