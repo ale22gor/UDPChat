@@ -20,3 +20,16 @@ Client::Client(const Client & client):
 
 {}
 
+Client &Client::operator=(Client other)
+{
+    if(&other == this)
+        return *this;
+
+    std::swap(m_clientAddress, other.m_clientAddress);
+    std::swap(m_clientPort, other.m_clientPort);
+    std::swap(m_name, other.m_name);
+    std::swap(online, other.online);
+
+    return *this;
+}
+

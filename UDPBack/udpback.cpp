@@ -93,17 +93,17 @@ void UDPBack::readMessage()
         switch(type){
         case HelloOnline:{
 
-            Client newClient{GetClientInfo(data)};
+            Client newClient{getClientInfo(data)};
             clients.push_back(newClient);
-            emit clientAdded(newClient);
+            emit clientAdded(newClient.m_name, newClient.isOnline());
 
             break;
         }
         case HelloOffline:{
-            Client newClient{GetClientInfo(data)};
+            Client newClient{getClientInfo(data)};
             newClient.setOnline();
             clients.push_back(newClient);
-            emit clientAdded(newClient);
+            emit clientAdded(newClient.m_name, newClient.isOnline());
             break;
         }
         case Message:{
@@ -118,7 +118,7 @@ void UDPBack::readMessage()
             break;
         }
         case SendPingTo:{
-            Client newClient{GetClientInfo(data)};
+            Client newClient{getClientInfo(data)};
             sendData(Ping,"ping",&newClient);
 
             break;
@@ -126,7 +126,7 @@ void UDPBack::readMessage()
 
         case UpdateInfo:{
 
-            Client updateClient{GetClientInfo(data)};
+            Client updateClient{getClientInfo(data)};
             QString clientName {updateClient.m_name};
             auto oldInfo = std::find_if(clients.begin(),clients.end(),
                                         [&clientName] (Client const& c)
@@ -136,12 +136,12 @@ void UDPBack::readMessage()
             oldInfo->m_clientAddress = updateClient.m_clientAddress;
             oldInfo->setOnline();
 
-            emit clientChanged(*oldInfo);
+            emit clientChanged(oldInfo->m_name, oldInfo->isOnline());
 
             break;
         }
         case OffOnLine:{
-            Client updateClient{GetClientInfo(data)};
+            Client updateClient{getClientInfo(data)};
             QString clientName{updateClient.m_name};
 
             auto oldInfo = std::find_if(clients.begin(),clients.end(),
@@ -149,7 +149,7 @@ void UDPBack::readMessage()
             {return (c.m_name == clientName) ; });
 
             oldInfo->setOnline();
-            emit clientChanged(*oldInfo);
+            emit clientChanged(oldInfo->m_name, oldInfo->isOnline());
             break;
         }
         }
@@ -180,7 +180,7 @@ void UDPBack::sendMessage(QString message)
     sendData(Message,meessageWithName);
 }
 
-Client UDPBack::GetClientInfo(QByteArray &data)
+Client UDPBack::getClientInfo(QByteArray &data)
 {
     int index{data.indexOf('|')};
     QString ipStr = data.mid(0,index);

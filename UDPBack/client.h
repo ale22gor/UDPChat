@@ -21,6 +21,9 @@ public:
     void setOnline(){online = !online;}
     bool isOnline() const {return online;}
 
+    Client& operator=(Client other);
+
+
 private:
     bool online;
 

@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MessageList.qml</file>
+        <file>ClientList.qml</file>
+        <file>PingButton.qml</file>
+        <file>MessageInput.qml</file>
+        <file>Login.qml</file>
+    </qresource>
+</RCC>

@@ -21,7 +21,7 @@ public:
 
 private:
     void sendData(const qint8, const QByteArray ,const Client *specificClient = nullptr);
-    Client GetClientInfo(QByteArray&);
+    Client getClientInfo(QByteArray&);
 
     std::list<Client> clients;
     quint16 m_clientPort;
@@ -33,8 +33,8 @@ private:
 
 signals:
     void messageRecieved(QString);
-    void clientAdded(Client);
-    void clientChanged(Client);
+    void clientAdded(QString, bool);
+    void clientChanged(QString, bool);
 
 public slots:
     void readMessage();
