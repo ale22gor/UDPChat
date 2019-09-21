@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.12
 
 Item {
 
-    signal login(string name, int localPort, int serverPort, string serverIp)
+    signal login()
 
     ColumnLayout {
         anchors.fill: parent
@@ -28,7 +28,10 @@ Item {
         Button {
             Layout.alignment: Qt.AlignCenter
             text: "Connect"
-            onClicked: login(name.text, localPort.text, serverPort.text, serverIp.text)
+            onClicked:{
+                onClicked: model.setupConnection(name.text,localPort.text,serverPort.text,serverIp.text)
+                login()
+            }
         }
     }
 

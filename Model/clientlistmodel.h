@@ -5,16 +5,20 @@
 #include<QList>
 #include<QString>
 
-struct ClientModelElement{
+#include "model_global.h"
+
+
+struct MODELSHARED_EXPORT ClientModelElement{
     QString m_name;
     bool online;
 };
 
 
-class ClientListModel: public QAbstractListModel
+class MODELSHARED_EXPORT ClientListModel: public QAbstractListModel
 
 {
     Q_OBJECT
+
     QList<ClientModelElement> m_clients;
     enum ClientRoles {
             NameRole = Qt::UserRole + 1,

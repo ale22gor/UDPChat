@@ -1,6 +1,7 @@
 import QtQuick 2.0
 
 TextInput {
+
         id: messageInput
         objectName: "messageInput"
 
@@ -11,6 +12,7 @@ TextInput {
 
         onAccepted: {
                 MessageModel.addMessage(text)
+                model.sendMessage(text)
         }
 
 

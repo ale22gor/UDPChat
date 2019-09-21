@@ -6,8 +6,10 @@
 class QStringList;
 class QString;
 
+#include "model_global.h"
 
-class MessagesModel:public QAbstractListModel
+
+class MODELSHARED_EXPORT MessagesModel:public QAbstractListModel
 {
     Q_OBJECT
     QStringList messageList;

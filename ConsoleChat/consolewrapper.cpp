@@ -11,6 +11,7 @@
 ConsoleWrapper::ConsoleWrapper(QString name, quint16 localPort, quint16 serverPort, QHostAddress serverIp, QObject *parent):
     QObject(parent)
 {
+    /*
     m_notifier = new QSocketNotifier{ fileno(stdin), QSocketNotifier::Read, this};
     connect(m_notifier, SIGNAL(activated(int)), this, SLOT(readConsole()));
 
@@ -21,6 +22,7 @@ ConsoleWrapper::ConsoleWrapper(QString name, quint16 localPort, quint16 serverPo
     connect(this, SIGNAL(sendMessage(QString)),udpBack, SLOT(sendMessage(QString)));
     connect(this, SIGNAL(disconnect()),udpBack, SLOT(disconnected()));
     connect(this, SIGNAL(sendPing()),udpBack, SLOT(sendPing()));
+    */
 
 }
 

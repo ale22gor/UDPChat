@@ -8,8 +8,8 @@ enum  MessageTypes{ HelloOnline, HelloOffline , Message , Ping ,
                     SendPingTo ,SomeFeature , AnotherFeature ,
                     UpdateInfo , OffOnLine , ExitChat };
 
-UDPBack::UDPBack(QString name,quint16 clientPort, quint16 serverPort, QHostAddress serverIP, QObject *parent) : QObject(parent),
-    m_name{name}, m_clientPort{clientPort}, m_server{serverIP,serverPort,"server"}
+UDPBack::UDPBack(QString name,quint16 clientPort, quint16 serverPort, QString serverIP, QObject *parent) : QObject(parent),
+    m_name{name}, m_clientPort{clientPort}, m_server{QHostAddress{serverIP},serverPort,"server"}
 {
 
     udpSocket = new QUdpSocket(this);
@@ -172,6 +172,8 @@ void UDPBack::disconnected()
 
 void UDPBack::sendMessage(QString message)
 {
+    qDebug()<<message;
+
     QByteArray meessageWithName;
     meessageWithName.append(m_name);
     meessageWithName.append(':');

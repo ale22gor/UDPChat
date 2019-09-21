@@ -2,18 +2,18 @@
 #define MODEL_H
 
 #include <QObject>
-#include<QString>
-#include<QHostAddress>
+#include <QString>
 
 #include "messagesmodel.h"
 #include "clientlistmodel.h"
 
 class UDPBack;
 
+#include "model_global.h"
 
 
 
-class Model : public QObject
+class MODELSHARED_EXPORT Model : public QObject
 {
     Q_OBJECT
 
@@ -30,10 +30,12 @@ public:
 
 signals:
     void disconnect();
+    void sendMessage(QString);
+    void sendPing();
 
 public slots:
-    void setupConnection(QString, quint16 , quint16, QHostAddress);
-
+    void setupConnection(QString, int , int, QString);
 };
 
 #endif // MODEL_H
+

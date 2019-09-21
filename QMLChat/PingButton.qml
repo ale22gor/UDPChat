@@ -5,5 +5,5 @@ Button {
     id: pingButton
     objectName: "pingButton"
     text: "Ping"
-    onClicked: model.submit()
+    onClicked: model.sendPing()
 }

@@ -4,7 +4,6 @@
 #include <QVariant>
 #include <QString>
 
-
 #include "model.h"
 
 
@@ -24,9 +23,8 @@ int main(int argc, char *argv[])
     ctxt->setContextProperty("MessageModel", QVariant::fromValue(myModel.getMessageModel()));
     ctxt->setContextProperty("ClientModel", QVariant::fromValue(myModel.getClientModel()));
 
-    //myModel.setupConnection("loh",1488,3228,QHostAddress{"192.168.0.11"});
+    ctxt->setContextProperty("model", &myModel);
 
-    QObject::connect(ctxt, SIGNAL(login()), myModel, SLOT(setupConnection(QString,quint16,quint16,QString)));
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

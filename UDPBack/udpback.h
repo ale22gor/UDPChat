@@ -14,7 +14,7 @@ class UDPBACKSHARED_EXPORT UDPBack :public QObject
     Q_OBJECT
 
 public:
-    UDPBack(QString, quint16, quint16, QHostAddress, QObject *parent = nullptr);
+    UDPBack(QString, quint16, quint16, QString, QObject *parent = nullptr);
 
 
     QString m_name;

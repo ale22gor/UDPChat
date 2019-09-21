@@ -48,6 +48,7 @@ Widget::~Widget()
 
 void Widget::setupConnection(QString name, quint16 localPort, quint16 serverPort, QHostAddress serverIp)
 {
+    /*
     udpBack = new UDPBack(name, localPort, serverPort, serverIp, this);
 
     connect(udpBack, SIGNAL(messageRecieved(QString)),this, SLOT(AddMessage(QString)));
@@ -58,6 +59,7 @@ void Widget::setupConnection(QString name, quint16 localPort, quint16 serverPort
     connect(this, SIGNAL(disconnect()),udpBack, SLOT(disconnected()));
 
     connect(m_pingButton, SIGNAL(released()),udpBack, SLOT(sendPing()));
+    */
 
 }
 

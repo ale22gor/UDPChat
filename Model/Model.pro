@@ -1,16 +1,17 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-09-14T17:03:49
+# Project created by QtCreator 2019-09-21T14:59:04
 #
 #-------------------------------------------------
+
 QT       -= gui
 QT       +=core network
 
 
-TARGET = UDPBack
+TARGET = Model
 TEMPLATE = lib
 
-DEFINES += UDPBACK_LIBRARY
+DEFINES += MODEL_LIBRARY
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -24,15 +25,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        client.cpp \
-        udpback.cpp
+        clientlistmodel.cpp \
+        messagesmodel.cpp \
+        model.cpp
 
 HEADERS += \
-        client.h \
-        udpback.h \
-        udpback_global.h
+        clientlistmodel.h \
+        messagesmodel.h \
+        model.h \
+        model_global.h 
 
 unix {
     target.path = /usr/lib
     INSTALLS += target
 }
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../UDPBack/release/ -lUDPBack
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../UDPBack/debug/ -lUDPBack
+else:unix: LIBS += -L$$OUT_PWD/../UDPBack/ -lUDPBack
+
+INCLUDEPATH += $$PWD/../UDPBack
+DEPENDPATH += $$PWD/../UDPBack
