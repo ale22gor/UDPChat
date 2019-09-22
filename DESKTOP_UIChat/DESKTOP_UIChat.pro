@@ -46,3 +46,10 @@ else:unix: LIBS += -L$$OUT_PWD/../UDPBack/ -lUDPBack
 INCLUDEPATH += $$PWD/../UDPBack
 DEPENDPATH += $$PWD/../UDPBack
 
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Model/release/ -lModel
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Model/debug/ -lModel
+else:unix: LIBS += -L$$OUT_PWD/../Model/ -lModel
+
+INCLUDEPATH += $$PWD/../Model
+DEPENDPATH += $$PWD/../Model

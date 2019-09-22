@@ -25,6 +25,8 @@ int main(int argc, char *argv[])
 
     ctxt->setContextProperty("model", &myModel);
 
+    //QObject::connect(&engine, &QQmlApplicationEngine::quit, &myModel, &Model::disconnect);
+
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

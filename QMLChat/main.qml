@@ -7,7 +7,7 @@ Window {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Hello World")
+    title: qsTr("QMLChat")
 
     Popup {
         id: popup
@@ -75,7 +75,10 @@ Window {
         }
 
     }
-
+    // @disable-check M16
+    onClosing: {
+        model.disconnect()
+    }
 
 
 }

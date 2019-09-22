@@ -5,21 +5,24 @@ Model::Model(QObject *parent) : QObject{parent}
 
 {
     m_clientListModel = new ClientListModel{this};
+    m_clientListModel->addClient("loh",false);
     m_messagesList = new MessagesModel{this};
+
+    m_messagesList->addMessage("2232");
 }
 
 void Model::setupConnection(QString name, int localPort, int serverPort, QString serverIp)
 {
     udpBack = new UDPBack(name, localPort, serverPort, serverIp, this);
 
-    connect(udpBack, SIGNAL(messageRecieved(QString)),m_messagesList, SLOT(addMessage(QString)));
-    connect(udpBack, SIGNAL(clientAdded(QString, bool)),m_clientListModel, SLOT(addClient(QString, bool)));
-    connect(udpBack, SIGNAL(clientChanged(QString, bool)),m_clientListModel, SLOT(changeStatus(QString, bool)));
+    connect(udpBack, &UDPBack::messageRecieved,m_messagesList, &MessagesModel::addMessage);
+    connect(udpBack, &UDPBack::clientAdded,m_clientListModel, &ClientListModel::addClient);
+    connect(udpBack, &UDPBack::clientChanged,m_clientListModel, &ClientListModel::changeStatus);
 
-    connect(this, SIGNAL(sendPing()),udpBack, SLOT(sendPing()));
-    connect(this, SIGNAL(sendMessage(QString)),udpBack, SLOT(sendMessage(QString)));
+    connect(this, &Model::sendPing,udpBack, &UDPBack::sendPing);
+    connect(this, &Model::sendMessage,udpBack, &UDPBack::sendMessage);
 
-    //connect(this, SIGNAL(disconnect()),udpBack, SLOT(disconnected()));
+    connect(this, &Model::disconnect,udpBack, &UDPBack::disconnected);
 
 }
 

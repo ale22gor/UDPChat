@@ -36,6 +36,13 @@ QVariant ClientListModel::data(const QModelIndex &index, int role) const
             return "online";
         else
             return "offline";
+    }else if (role == Qt::DisplayRole) {
+        QString status;
+        if (client.online)
+            status = "online";
+        else
+            status = "offline";
+        return client.m_name +":"+status;
     }
     return QVariant();
 

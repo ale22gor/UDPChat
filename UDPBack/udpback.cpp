@@ -22,12 +22,12 @@ UDPBack::UDPBack(QString name,quint16 clientPort, quint16 serverPort, QString se
     }
 
     udpSocket->bind(localIpAddress, m_clientPort);
-    connect(udpSocket, SIGNAL(readyRead()),this, SLOT(readMessage()));
-    connect(udpSocket, SIGNAL(disconnected()),this, SLOT(disconnected()));
+    connect(udpSocket, &QUdpSocket::readyRead,this, &UDPBack::readMessage);
+    connect(udpSocket, &QUdpSocket::disconnected,this, &UDPBack::disconnected);
 
 
     pingTimer = new QTimer(this);
-    connect(pingTimer, SIGNAL(timeout()), this, SLOT(sendPing()));
+    connect(pingTimer, &QTimer::timeout, this, &UDPBack::sendPing);
     pingTimer->start(3000);
 
 
@@ -165,6 +165,7 @@ void UDPBack::sendPing()
 
 void UDPBack::disconnected()
 {
+    qDebug()<<"disconnect";
     QByteArray nameAsBytes;
     nameAsBytes.append(m_name);
     sendData(OffOnLine,nameAsBytes, &m_server);

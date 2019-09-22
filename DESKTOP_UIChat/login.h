@@ -3,7 +3,6 @@
 
 #include <QDialog>
 #include <QString>
-#include <QHostAddress>
 class QLineEdit;
 class QPushButton;
 
@@ -20,7 +19,7 @@ private:
     QLineEdit *clientNameEdit, *clientPortEdit, *serverPortEdit, *serverIpEdit;
     QPushButton *submitButton;
 signals:
-    void dataComplete(QString, quint16 , quint16, QHostAddress);
+    void dataComplete(QString, int , int, QString);
 private slots:
     void dataEntered();
 };
