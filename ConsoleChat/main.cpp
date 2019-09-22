@@ -1,6 +1,5 @@
 #include <QCoreApplication>
 #include <QTextStream>
-#include <QHostAddress>
 
 #include "consolewrapper.h"
 
@@ -15,20 +14,19 @@ int main(int argc, char *argv[])
     name = qtin.readLine();
 
     QTextStream{stdout} <<"write local port"<<endl;
-    quint16 localPort;
+    int localPort;
     localPort = qtin.readLine().toUShort();
 
     QTextStream{stdout} <<"write server port"<<endl;
-    quint16 serverPort;
+    int serverPort;
     serverPort = qtin.readLine().toUShort();
 
     QTextStream{stdout} <<"write server ip"<<endl;
-    QString serverIpString;
-    serverIpString = qtin.readLine();
-    QHostAddress serverIp{serverIpString};
+    QString serverIp;
+    serverIp = qtin.readLine();
 
     ConsoleWrapper consoleWrapper(name,localPort,serverPort,serverIp);
-    QObject::connect(&consoleWrapper, SIGNAL(disconnect()), &a, SLOT(quit()));
+    QObject::connect(&consoleWrapper, &ConsoleWrapper::disconnect, &a, &QCoreApplication::quit);
 
     return a.exec();
 }

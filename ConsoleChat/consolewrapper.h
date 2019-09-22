@@ -15,7 +15,7 @@ class ConsoleWrapper:public QObject
     Q_OBJECT
 
 public:
-    ConsoleWrapper(QString , quint16 , quint16 , QHostAddress , QObject *parent = nullptr);
+    ConsoleWrapper(QString , int , int , QString , QObject *parent = nullptr);
 
 signals:
     void disconnect();

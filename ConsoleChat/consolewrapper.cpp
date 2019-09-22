@@ -8,21 +8,21 @@
 
 
 
-ConsoleWrapper::ConsoleWrapper(QString name, quint16 localPort, quint16 serverPort, QHostAddress serverIp, QObject *parent):
+ConsoleWrapper::ConsoleWrapper(QString name, int localPort, int serverPort, QString serverIp, QObject *parent):
     QObject(parent)
 {
-    /*
+
     m_notifier = new QSocketNotifier{ fileno(stdin), QSocketNotifier::Read, this};
-    connect(m_notifier, SIGNAL(activated(int)), this, SLOT(readConsole()));
+    connect(m_notifier, &QSocketNotifier::activated, this, &ConsoleWrapper::readConsole);
 
     udpBack = new UDPBack(name, localPort, serverPort, serverIp, this);
 
-    connect(udpBack, SIGNAL(messageRecieved(QString)),this, SLOT(showMessage(QString)));
+    connect(udpBack, &UDPBack::messageRecieved,this, &ConsoleWrapper::showMessage);
 
-    connect(this, SIGNAL(sendMessage(QString)),udpBack, SLOT(sendMessage(QString)));
-    connect(this, SIGNAL(disconnect()),udpBack, SLOT(disconnected()));
-    connect(this, SIGNAL(sendPing()),udpBack, SLOT(sendPing()));
-    */
+    connect(this, &ConsoleWrapper::sendMessage,udpBack, &UDPBack::sendMessage);
+    connect(this, &ConsoleWrapper::disconnect,udpBack, &UDPBack::disconnected);
+    //connect(this, SIGNAL(sendPing()),udpBack, SLOT(sendPing()));
+
 
 }
 

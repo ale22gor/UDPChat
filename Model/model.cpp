@@ -5,10 +5,7 @@ Model::Model(QObject *parent) : QObject{parent}
 
 {
     m_clientListModel = new ClientListModel{this};
-    m_clientListModel->addClient("loh",false);
     m_messagesList = new MessagesModel{this};
-
-    m_messagesList->addMessage("2232");
 }
 
 void Model::setupConnection(QString name, int localPort, int serverPort, QString serverIp)

@@ -9,13 +9,17 @@ void ClientListModel::addClient(QString name, bool status)
 
 void ClientListModel::changeStatus(QString name, bool status)
 {
-
     auto oldInfo = std::find_if(m_clients.begin(),m_clients.end(),
                                 [&name] (ClientModelElement const& c)
     {return (c.m_name == name) ; });
     if (oldInfo != m_clients.end()){
         oldInfo->online = status;
     }
+
+    QVector<int> roleVector;
+    roleVector << ClientRoles::StatusRole;
+
+    emit dataChanged(createIndex(0, 0), createIndex(rowCount()-1, 0),roleVector);
 }
 
 ClientListModel::ClientListModel(QObject *parent): QAbstractListModel{parent}
