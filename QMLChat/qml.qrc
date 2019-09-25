@@ -6,5 +6,7 @@
         <file>PingButton.qml</file>
         <file>MessageInput.qml</file>
         <file>Login.qml</file>
+        <file>ChatWindow.qml</file>
+        <file>ClientsWindow.qml</file>
     </qresource>
 </RCC>

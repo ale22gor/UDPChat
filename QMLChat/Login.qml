@@ -12,18 +12,25 @@ Item {
         TextField {
             Layout.alignment: Qt.AlignCenter
             id: name
+            placeholderText: "userName"
         }
         TextField {
             Layout.alignment: Qt.AlignCenter
             id: localPort
+            placeholderText: "loacl port"
+
         }
         TextField {
             Layout.alignment: Qt.AlignCenter
             id: serverPort
+            placeholderText: "server port"
+
         }
         TextField {
             Layout.alignment: Qt.AlignCenter
             id: serverIp
+            placeholderText: "server IP"
+
         }
         Button {
             Layout.alignment: Qt.AlignCenter

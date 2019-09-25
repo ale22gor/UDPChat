@@ -1,13 +1,38 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
-import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.5
 
-Window {
+ApplicationWindow {
     visible: true
     width: 640
     height: 480
     title: qsTr("QMLChat")
+
+
+    header:ToolBar {
+        ToolButton {
+            text:{
+                return view.currentItem.title === "Clients" ?  "Back" : "Clients"
+            }
+
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: {
+                view.currentItem.title !== "Chat" ?  view.currentIndex = 0 : view.currentIndex++
+            }
+        }
+
+        Label {
+            text: view.currentItem.title
+            anchors.leftMargin: 10
+            anchors.horizontalCenter: parent.horizontalCenter
+            padding: 10
+            font.pixelSize: 20
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+    }
 
     Popup {
         id: popup
@@ -23,58 +48,24 @@ Window {
             anchors.fill: parent
             onLogin: popup.close()
         }
-
-
-
     }
 
-
-    GridLayout {
-        id: grid
-        columns: 2
-        rows: 2
+    SwipeView {
+        id: view
+        currentIndex: 0
         anchors.fill: parent
 
-
-        MessageList{
-
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.minimumWidth: parent.width * 0.7
-            Layout.minimumHeight: parent.height * 0.9
-
+        ChatWindow{
+            title: qsTr("Chat")
         }
-
-        ClientList{
-            Layout.minimumWidth : parent.width * 0.3
-            Layout.minimumHeight: parent.height * 0.9
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-
+        ClientsWindow{
+            title: qsTr("Clients")
         }
-
-        Rectangle {
-            color: 'plum'
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.minimumWidth: parent.width * 0.7
-            Layout.minimumHeight: parent.height * 0.1
-
-            MessageInput{
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-            }
-
-        }
-
-        PingButton{
-            Layout.minimumWidth: parent.width * 0.3
-            Layout.minimumHeight: parent.height * 0.1
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-        }
-
     }
+
+
+
+
     // @disable-check M16
     onClosing: {
         model.disconnect()
