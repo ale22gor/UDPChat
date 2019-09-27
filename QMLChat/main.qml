@@ -12,14 +12,28 @@ ApplicationWindow {
     header:ToolBar {
         ToolButton {
             text:{
-                return view.currentItem.title === "Clients" ?  "Back" : "Clients"
+                if(view.currentItem.title === "Chat"){
+                    return "Clients"
+                }
+                if(view.currentItem.title === "Clients"){
+                    return "Back"
+                }
+            }
+            visible: {
+                return view.currentItem.title !== "Login"? true:false
             }
 
             anchors.left: parent.left
             anchors.leftMargin: 10
             anchors.verticalCenter: parent.verticalCenter
             onClicked: {
-                view.currentItem.title !== "Chat" ?  view.currentIndex = 0 : view.currentIndex++
+                if(view.currentItem.title === "Clients"){
+                    view.currentIndex = 1
+                }
+                else if(view.currentItem.title === "Chat"){
+                    view.currentIndex = 2
+                }
+
             }
         }
 
@@ -33,7 +47,7 @@ ApplicationWindow {
             verticalAlignment: Text.AlignVCenter
         }
     }
-
+    /*
     Popup {
         id: popup
         visible: true;
@@ -49,17 +63,35 @@ ApplicationWindow {
             onLogin: popup.close()
         }
     }
+    */
+
 
     SwipeView {
         id: view
         currentIndex: 0
         anchors.fill: parent
+        Page{
+            title: qsTr("Login")
 
-        ChatWindow{
-            title: qsTr("Chat")
+            Login{
+
+                onAccepted:{
+                    view.currentIndex++
+                    visible=false
+                }
+            }
         }
-        ClientsWindow{
+        Page{
+            id:chatPage
+            title: qsTr("Chat")
+
+            ChatWindow{
+            }
+        }
+        Page{
             title: qsTr("Clients")
+            ClientsWindow{
+            }
         }
     }
 

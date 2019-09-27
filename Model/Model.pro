@@ -8,7 +8,6 @@ QT       -= gui
 QT       +=core network
 
 
-TARGET = Model
 TEMPLATE = lib
 
 DEFINES += MODEL_LIBRARY
@@ -35,10 +34,11 @@ HEADERS += \
         model.h \
         model_global.h 
 
+
 unix {
     target.path = /usr/lib
-    INSTALLS += target
 }
+!isEmpty(target.path): INSTALLS += target
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../UDPBack/release/ -lUDPBack
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../UDPBack/debug/ -lUDPBack

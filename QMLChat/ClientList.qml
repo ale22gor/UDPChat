@@ -12,26 +12,14 @@ ListView {
     delegate:Row{
 
         Rectangle {
-            color: "lightblue"
+            color: status === "online"? "lightgreen":"lightred"
             width: childrenRect.width + 10
             height: childrenRect.height+ 5
 
             Label {
                 anchors.centerIn: parent
-                text: name + ":"
-                font.pixelSize: 30
 
-            }
-
-        }
-        Rectangle {
-            color: status === "online"? "lightgreen":"lightred"
-            width: childrenRect.width + 10
-            height: childrenRect.height + 5
-
-            Label {
-                anchors.centerIn: parent
-                text: status
+                text: name + ":" + status
                 font.pixelSize: 30
 
             }
