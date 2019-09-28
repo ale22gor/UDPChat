@@ -47,34 +47,16 @@ ApplicationWindow {
             verticalAlignment: Text.AlignVCenter
         }
     }
-    /*
-    Popup {
-        id: popup
-        visible: true;
-        anchors.centerIn: Overlay.overlay
-        width: 300
-        height: 300
-        modal: true
-        focus: true
-        closePolicy: Popup.NoAutoClose
-
-        Login{
-            anchors.fill: parent
-            onLogin: popup.close()
-        }
-    }
-    */
-
-
     SwipeView {
         id: view
         currentIndex: 0
         anchors.fill: parent
+
+
         Page{
             title: qsTr("Login")
 
-            Login{
-
+           Login{
                 onAccepted:{
                     view.currentIndex++
                     visible=false
@@ -82,8 +64,8 @@ ApplicationWindow {
             }
         }
         Page{
-            id:chatPage
             title: qsTr("Chat")
+
 
             ChatWindow{
             }
@@ -95,10 +77,6 @@ ApplicationWindow {
         }
     }
 
-
-
-
-    // @disable-check M16
     onClosing: {
         model.disconnect()
     }

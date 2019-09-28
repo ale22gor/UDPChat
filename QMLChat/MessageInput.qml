@@ -1,20 +1,20 @@
 import QtQuick 2.0
+import QtQuick.Controls 2.5
 
-TextInput {
+
+TextField {
 
     id: messageInput
     objectName: "messageInput"
-    text: "Message"
-    width: parent.width
-    height: parent.height
-
-    anchors.fill: parent
+    placeholderText: "Input Message"
+    maximumLength:2000
     verticalAlignment: Text.AlignVCenter
     anchors.leftMargin: 10
-    wrapMode: TextInput.WrapAnywhere
+    wrapMode: TextField.Wrap
     onAccepted: {
         MessageModel.addMyMessage(text)
         model.sendMessage(text)
+        text = ""
     }
 
 

@@ -7,24 +7,30 @@ ListView {
     objectName: "messageList"
     model: MessageModel
 
-    verticalLayoutDirection: ListView.BottomToTop
-    spacing: 12
 
+    spacing: 18
+    clip: true
 
     delegate:Row{
         anchors.right: sendByMe ? parent.right : parent.left
         spacing: 6
+        Label {
+            id:messageText
+            text: message
+            color: sendByMe ? "black" : "white"
+            wrapMode: Label.Wrap
+            font.pixelSize: 14
+            verticalAlignment: Text.AlignVCenter
 
-        Rectangle {
 
-            color: sendByMe ? "lightgrey" : "steelblue"
-            width: childrenRect.width + 20
-            height: childrenRect.height + 20
+            width: Math.min(messageText.implicitWidth,messageList.width)
 
-            Label {
-                anchors.centerIn: parent
-                text: message
-                color: sendByMe ? "black" : "white"
+            background: Rectangle {
+                anchors.centerIn: parent.Center
+                color: sendByMe ? "lightgrey" : "steelblue"
+                height: messageText.implicitHeight + 7
+                width: messageText.implicitWidth + 14
+
             }
         }
     }

@@ -6,19 +6,17 @@ ListView {
     id: clientList
     objectName: "clientList"
     model: ClientModel
-
     spacing: 20
-
     delegate:Row{
 
         Rectangle {
             color: status === "online"? "lightgreen":"lightred"
-            width: childrenRect.width + 10
-            height: childrenRect.height+ 5
+            width: clientText.width+10
+            height: clientText.height + 5
 
             Label {
+                id:clientText
                 anchors.centerIn: parent
-
                 text: name + ":" + status
                 font.pixelSize: 30
 

@@ -16,6 +16,7 @@ Dialog {
             Layout.fillWidth: true
             Layout.fillHeight: true
             id: name
+            maximumLength:12
             placeholderText: "userName"
         }
         TextField {
@@ -23,6 +24,7 @@ Dialog {
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignCenter
             id: localPort
+            validator: IntValidator {bottom: 0; top: 65535;}
             placeholderText: "loacl port"
 
         }
@@ -31,6 +33,7 @@ Dialog {
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignCenter
             id: serverPort
+            validator: IntValidator {bottom: 0; top: 65535;}
             placeholderText: "server port"
 
         }
@@ -39,6 +42,7 @@ Dialog {
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignCenter
             id: serverIp
+            inputMask: "000.000.000.000;_"
             placeholderText: "server IP"
 
         }

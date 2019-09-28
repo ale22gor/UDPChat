@@ -6,35 +6,25 @@ import QtQuick.Controls 2.5
 GridLayout {
     id: grid
     columns: 2
-    rows: 2
+    rows: 7
     anchors.fill: parent
-
-
     MessageList{
+        Layout.rightMargin: 10
+        Layout.leftMargin: 5
+        Layout.topMargin: 5
+
         Layout.columnSpan: 2
         Layout.fillWidth: true
         Layout.fillHeight: true
-        Layout.minimumWidth: parent.width
-        Layout.minimumHeight: parent.height * 0.9
-
+        Layout.rowSpan:  6
     }
-    Rectangle {
-        color: 'plum'
+    MessageInput{
         Layout.fillWidth: true
-        Layout.fillHeight: true
-        Layout.minimumWidth: parent.width * 0.7
-        Layout.minimumHeight: parent.height * 0.1
-
-        MessageInput{
-        }
-
+        Layout.minimumWidth: 100
+        Layout.preferredHeight: 50
     }
-
     PingButton{
-        Layout.minimumWidth: parent.width * 0.3
-        Layout.minimumHeight: parent.height * 0.1
-        Layout.fillWidth: true
-        Layout.fillHeight: true
+        Layout.preferredHeight: 50
     }
 
 }
