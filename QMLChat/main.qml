@@ -51,6 +51,7 @@ ApplicationWindow {
         id: view
         currentIndex: 0
         anchors.fill: parent
+        interactive: false
 
 
         Page{

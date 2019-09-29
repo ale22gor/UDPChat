@@ -12,44 +12,72 @@ Dialog {
         anchors.fill: parent
 
         TextField {
-            Layout.alignment: Qt.AlignCenter
             Layout.fillWidth: true
             Layout.fillHeight: true
             id: name
             maximumLength:12
             placeholderText: "userName"
+            onActiveFocusChanged:{
+                inputMask: "Aaaaaaaaaaaa"
+            }
         }
         TextField {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.alignment: Qt.AlignCenter
             id: localPort
-            validator: IntValidator {bottom: 0; top: 65535;}
+            validator: RegExpValidator{regExp:{
+                    var myRE = new RegExp (['([1-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9',
+                                            '[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|',
+                                            '99[0-8][0-9]|999[0-9]|[1-5][0-9]{4}|6[0-4][0-9]{3}|',
+                                            '65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])'].join(''));
+                    return myRE
+                }
+            }
+
             placeholderText: "loacl port"
 
         }
         TextField {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.alignment: Qt.AlignCenter
             id: serverPort
-            validator: IntValidator {bottom: 0; top: 65535;}
+            validator: RegExpValidator{regExp:{
+                    var myRE = new RegExp (['([1-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9',
+                                            '[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|',
+                                            '99[0-8][0-9]|999[0-9]|[1-5][0-9]{4}|6[0-4][0-9]{3}|',
+                                            '65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])'].join(''));
+                    return myRE
+                }
+            }
             placeholderText: "server port"
 
         }
         TextField {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.alignment: Qt.AlignCenter
             id: serverIp
-            inputMask: "000.000.000.000;_"
+            validator: RegExpValidator{regExp:{
+                    var ipRange = '(([ 0]+)|([ 0]*[0-9] *)|([0-9][0-9] )|([ 0][0-9][0-9])|(1[0-9][0-9])|([2][0-4][0-9])|(25[0-5]))';
+                    var ipRegex = new RegExp (['^',
+                                               ipRange,
+                                               '\\.',
+                                               ipRange,
+                                               '\\.',
+                                               ipRange,
+                                               '\\.',
+                                               ipRange,
+                                               '$'].join(''));
+                    return ipRegex
+                }
+            }
             placeholderText: "server IP"
+            inputMask:"000.000.000.000"
+
 
         }
         Button {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.alignment: Qt.AlignCenter
             text: "Connect"
             onClicked:{
                 onClicked: model.setupConnection(name.text,localPort.text,serverPort.text,serverIp.text)
